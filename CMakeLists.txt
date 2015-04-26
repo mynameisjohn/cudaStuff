@@ -15,7 +15,14 @@ cuda_add_library(
 	gsRelax.h
 )
 
+cuda_add_library(
+	misc
+	misc.cu
+	misc.h
+)
+
 target_link_libraries(
 	main
 	gsRelax
+	misc
 )
