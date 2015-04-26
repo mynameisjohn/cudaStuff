@@ -90,7 +90,7 @@ void relax(uint32_t N, uint32_t dim, uint32_t nIt, float minRes){
 			nB=1;
 			nT=512;
 		}
-		for (int i=0; i<2*nIt/* && res < minRes*/;){
+		for (int i=0; i<2*nIt/* && res > minRes*/;){
 			cudaMemcpy(d_Data_A, h_Data_A, size, cudaMemcpyHostToDevice);
 			cudaMemcpy(d_Data_B, h_Data_B, size, cudaMemcpyHostToDevice);
 			gsRelax_Laplacian1D<<<nB, nT>>>(d_Data_A, d_Data_B, N, i++); 
@@ -108,7 +108,7 @@ void relax(uint32_t N, uint32_t dim, uint32_t nIt, float minRes){
 		dim3 nB, nT;
 		nB.x = (len/32)/2; nB.y = (len/32)/2;
 		nT.x = 32; nT.y = 32;
-		for (int i=0; i<2*nIt/* && res < minRes*/;){
+		for (int i=0; i<2*nIt/* && res > minRes*/;){
 			cudaMemcpy(d_Data_A, h_Data_A, size, cudaMemcpyHostToDevice);
 			cudaMemcpy(d_Data_B, h_Data_B, size, cudaMemcpyHostToDevice);
 			gsRelax_Laplacian2D<<<nB, nT>>>(d_Data_A, d_Data_B, len, i++); 
